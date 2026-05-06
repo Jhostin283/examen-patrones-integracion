@@ -1,0 +1,31 @@
+version: '3.8'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: logistica-rabbitmq
+    ports:
+      - "5672:5672"   # Puerto para comunicación AMQP
+      - "15672:15672" # Puerto para panel de administración web
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  postgres-envio:
+    image: postgres:15-alpine
+    container_name: logistica-postgres-envio
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: enviodb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
+
+  postgres-tarifa:
+    image: postgres:15-alpine
+    container_name: logistica-postgres-tarifa
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: tarifadb
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: adminpassword
